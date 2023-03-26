@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="left_block">
+        <div>
+
+            <h3>Login</h3>
+
+            <input type="text" placeholder="Login" id="login" [(ngModel)]="newLogin">
+
+            <h3>Password</h3>
+
+            <input type="password" placeholder="Password" id="pass" [(ngModel)]="newPassword">
+
+            <h3>Email</h3>
+
+            <input type="text" placeholder="Email" id="email" [(ngModel)]="newEmail">
+
+            <p><input *ngIf="!checkStatus" type="button" value="Add user" name="btn" class="add_btn" (click)="addInfo()"
+                    [disabled]="!newLogin || !newPassword || !newEmail"></p>
+            <p><input *ngIf="checkStatus" type="button" class="change-users" value="Change Info" (click)="updateName()" [disabled]="!newLogin || !newPassword || !newEmail"></p>
+
+        </div>
+    </div>
+    <div class="right_block">
+        <div class="top-container">
+            <div class="index">#</div>
+            <div class="user-login">Login</div>
+            <div class="user-password">Password</div>
+            <div class="user-email">Email</div>
+            <div class="edit-block">Edit</div>
+            <div class="delete-block">Delete</div>
+        </div>
+        <div class="info-container" *ngFor="let user of allUsers;index as i">
+            <div>{{i + 1}}</div>
+            <div>{{user.login}}</div>
+            <div>{{user.password}}</div>
+            <div>{{user.email}}</div>
+            <div>
+                <button class="edit" (click)="usersEdit(i)">Edit</button>
+            </div>
+            <div>
+                <button class="delete" (click)="deleteUsers(i)" [disabled]="checkStatus">Delete</button>
+            </div>
+        </div>
+        <ng-container *ngIf="allUsers.length === 0">
+            <div class="info-message">
+                <h1>List its empty</h1>
+            </div>
+        </ng-container>
+    </div>
+</div>
